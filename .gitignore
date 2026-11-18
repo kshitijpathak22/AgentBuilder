@@ -1,0 +1,29 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Node / Frontend
+node_modules/
+frontend/build/
+npm-debug.log*
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# Runtime data & logs
+logs/
+api/practice_sessions.db
+api/practice_sessions.db-wal
+api/practice_sessions.db-shm
+api/user_photos/

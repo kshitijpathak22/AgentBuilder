@@ -1,0 +1,45 @@
+{
+  "allowed_users": [
+    {
+      "email": "admin@example.com",
+      "name": "Admin",
+      "role": "admin"
+    },
+    {
+      "email": "user@example.com",
+      "name": "User",
+      "role": "user"
+    },
+    {
+      "email": "developer@example.com",
+      "name": "Developer",
+      "role": "developer"
+    },
+    {
+      "email": "kshitijpathak1@kpmg.com",
+      "name": "Kshitij Pathak",
+      "role": "developer"
+    },
+    {
+      "email": "nehabehl@kpmg.com",
+      "name": "Neha Behl",
+      "role": "user"
+    },
+    {
+      "email": "harnathbabu@kpmg.com",
+      "name": "Harnath Babu",
+      "role": "user"
+    },
+    {
+      "email": "saurabhoberoi@kpmg.com",
+      "name": "Saurabh Oberoi",
+      "role": "user"
+    },
+    {
+      "email": "shreyanf@kpmg.com",
+      "name": "Shreyan Fernandes",
+      "role": "admin"
+    }
+  ],
+  "note": "Allowed user roles: user, admin, developer."
+}

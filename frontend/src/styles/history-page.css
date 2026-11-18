@@ -1,0 +1,149 @@
+/* SalesCoach History Layout Bugfix
+   Fixes non-uniform card sizing and large empty spacing between history cards. */
+.sc-remix-history-page.sc-remix-history-page {
+  width: min(100%, 1640px) !important;
+  margin: 0 auto !important;
+}
+
+.sc-remix-history-page.sc-remix-history-page .history-controls {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 16px !important;
+  flex-wrap: wrap !important;
+}
+
+.sc-remix-history-page.sc-remix-history-page .right-controls {
+  display: flex !important;
+  justify-content: flex-end !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+}
+
+.sc-remix-history-page.sc-remix-history-page .sessions-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(440px, 1fr)) !important;
+  grid-auto-flow: row !important;
+  grid-auto-rows: 1fr !important;
+  align-items: stretch !important;
+  gap: 24px !important;
+  margin-top: 0 !important;
+}
+
+.sc-remix-history-page.sc-remix-history-page .session-card,
+.sc-remix-history-page.sc-remix-history-page .session-card:nth-child(3n + 1),
+.sc-remix-history-page.sc-remix-history-page .session-card:nth-child(3n + 2),
+.sc-remix-history-page.sc-remix-history-page .session-card:nth-child(odd),
+.sc-remix-history-page.sc-remix-history-page .session-card:nth-child(even) {
+  grid-column: auto !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 285px !important;
+  margin: 0 !important;
+  display: grid !important;
+  grid-template-rows: auto 1fr auto auto !important;
+  align-self: stretch !important;
+  border-radius: 28px !important;
+  padding: 24px !important;
+  padding-left: 30px !important;
+  position: relative !important;
+}
+
+.sc-remix-history-page.sc-remix-history-page .session-card::after {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 24px;
+  bottom: 24px;
+  width: 3px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
+}
+
+.sc-remix-history-page.sc-remix-history-page .session-card > * {
+  min-width: 0 !important;
+}
+
+.sc-remix-history-page.sc-remix-history-page .session-header {
+  align-items: flex-start !important;
+
+}
+
+.sc-remix-history-page.sc-remix-history-page .session-info {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 10px !important;
+  min-width: 0 !important;
+}
+
+.sc-remix-history-page.sc-remix-history-page .session-title {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+  line-height: 1.35 !important;
+}
+
+.sc-remix-history-page.sc-remix-history-page .session-details {
+  justify-content: center !important;
+  padding: 12px 0 !important;
+}
+
+.sc-remix-history-page.sc-remix-history-page .session-actions {
+  justify-content: flex-end !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding-top: 12px !important;
+}
+
+.sc-remix-history-page.sc-remix-history-page .session-detail-panel {
+  align-self: start !important;
+  margin-top: 12px !important;
+}
+
+@media (max-width: 980px) {
+  .sc-remix-history-page.sc-remix-history-page .sessions-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .sc-remix-history-page.sc-remix-history-page .session-card {
+    min-height: 0 !important;
+    padding: 20px !important;
+    padding-left: 26px !important;
+  }
+  .sc-remix-history-page.sc-remix-history-page .right-controls,
+  .sc-remix-history-page.sc-remix-history-page .search-container input {
+    width: 100% !important;
+  }
+}
+/* Session cards on narrow screens: the details wrap instead of pushing the score and buttons off the card. */
+.sc-remix-history-page .gridList .session-header {
+  gap: 16px;
+}
+.sc-remix-history-page .gridList .leftPnl,
+.sc-remix-history-page .gridList .leftPnl > div:last-child {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.sc-remix-history-page .gridList .detils-list {
+  flex-wrap: wrap;
+  row-gap: 8px;
+}
+.sc-remix-history-page .gridList .detils-list li {
+  flex: 0 1 auto; /* items move to the next line first; one too long for a whole line wraps its own text */
+  min-width: 0;
+}
+.sc-remix-history-page .gridList .gridExtraIncom {
+  flex-shrink: 0;
+}
+
+@media (max-width: 520px) {
+  .sc-remix-history-page .gridList .session-header {
+    flex-wrap: wrap;
+  }
+  .sc-remix-history-page .gridList .gridExtraIncom {
+    margin-left: auto;
+  }
+}

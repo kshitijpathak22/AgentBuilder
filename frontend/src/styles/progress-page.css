@@ -1,0 +1,94 @@
+/* Progress page final layout fix:
+   - KPI cards are compact.
+   - KPI cards sit beside Learning Recommendations / Sessions by Difficulty, not above them. */
+.sc-progress-fixed-layout {
+
+}
+.sc-progress-fixed-layout .progress-top-charts {
+  display: flex !important;
+      justify-content: space-between;
+}
+.sc-progress-fixed-layout .progress-top-charts .card{
+width:49%;
+}
+
+
+.sc-progress-fixed-layout .progress-lower-layout {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 260px !important;
+  grid-template-areas: "insights kpis" !important;
+  gap: 24px !important;
+  align-items: start !important;
+  margin-bottom: 24px !important;
+}
+.sc-progress-fixed-layout .progress-bottom-content {
+  grid-area: insights !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  gap: 24px !important;
+  margin-bottom: 0 !important;
+  align-items: stretch !important;
+}
+.sc-progress-fixed-layout .progress-side-kpis {
+  display: flex;
+    margin-bottom: 20px;
+    gap: 20px;
+
+}
+.sc-progress-fixed-layout .progress-side-kpis  .card {
+  width: 100%;
+  
+}
+.sc-progress-fixed-layout .progress-side-kpis  .card .card-title{
+  font-size: 16px;
+}
+.sc-progress-fixed-layout .progress-side-kpis  .card .card-hd{
+  font-weight: bold;
+  color: var(--accent-primary) ;
+  font-size: 20px;
+}
+
+.sc-progress-fixed-layout .progress-side-kpis > .card > div:first-child {
+font-size: 16=px !important;
+    color: var(--text-muted) !important;
+    margin: 0px;
+}
+
+.sc-progress-fixed-layout .progress-side-kpis > .card > span {
+  width: fit-content !important;
+  align-self: start !important;
+  padding: 3px 8px !important;
+  font-size: 10px !important;
+  line-height: 1.2 !important;
+}
+.sc-progress-fixed-layout .progress-bottom-content > .card {
+  min-height: 360px !important;
+  height: auto !important;
+}
+.sc-progress-fixed-layout .progress-action-row {
+  display: flex !important;
+  justify-content: flex-end !important;
+  gap: 12px !important;
+}
+@media (max-width: 1180px) {
+  .sc-progress-fixed-layout .progress-lower-layout {
+    grid-template-columns: 1fr !important;
+    grid-template-areas: "kpis" "insights" !important;
+  }
+  .sc-progress-fixed-layout .progress-side-kpis {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+@media (max-width: 900px) {
+  .sc-progress-fixed-layout .progress-top-charts,
+  .sc-progress-fixed-layout .progress-bottom-content {
+    grid-template-columns: 1fr !important;
+  }
+  .sc-progress-fixed-layout .progress-side-kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+@media (max-width: 640px) {
+  .sc-progress-fixed-layout { padding: 16px !important; }
+  .sc-progress-fixed-layout .progress-side-kpis { grid-template-columns: 1fr !important; }
+}

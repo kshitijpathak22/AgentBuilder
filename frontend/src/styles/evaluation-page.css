@@ -1,0 +1,129 @@
+/* New evaluation layout: score left, dimensions right, recommendations below. */
+.sc-evaluation-remix-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.75fr) minmax(0, 1.25fr);
+  grid-template-areas:
+    "header header"
+    "score dims"
+    "recommendations recommendations"
+    "actions actions";
+  gap: 24px;
+  align-items: stretch;
+}
+
+.sc-evaluation-remix-layout .eval-header { grid-area: header; }
+.sc-evaluation-remix-layout .eval-score-card {
+  grid-area: score;
+  margin-bottom: 0 !important;
+  height: 100%;
+  min-height: 0;
+}
+.sc-evaluation-remix-layout .eval-score-card svg {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+}
+.sc-evaluation-remix-layout .eval-dims-section {
+  grid-area: dims;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+.sc-evaluation-remix-layout .eval-dims-grid {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+.sc-evaluation-remix-layout .eval-dims-grid > .card {
+  min-height: 0;
+  position: relative;
+}
+
+.sc-evaluation-remix-layout .eval-dims-grid > .card:hover {
+  z-index: 2;
+}
+.sc-evaluation-remix-layout .eval-recommendations-section { grid-area: recommendations; }
+.sc-evaluation-remix-layout .eval-actions { grid-area: actions; margin-top: 0 !important; }
+
+@media (max-width: 1180px) {
+  .sc-evaluation-remix-layout {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "score"
+      "dims"
+      "recommendations"
+      "actions";
+  }
+  .sc-evaluation-remix-layout .eval-score-card {
+    min-height: 260px;
+  }
+  .sc-evaluation-remix-layout .eval-dims-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    grid-template-rows: auto !important;
+  }
+}
+
+/* Small fix: bottom 3 widgets span the full bottom width instead of staying only in the right column. */
+.sc-evaluation-requested-layout {
+  grid-template-areas:
+    "header header"
+    "dimsTitle dimsTitle"
+    "dims dims"
+    "score score"
+    "feedback feedback"
+    "insights insights"
+    "actions actions" !important;
+  grid-template-rows: auto auto auto 330px 220px 220px auto !important;
+}
+
+.sc-evaluation-requested-layout .eval-score-card {
+  min-height: 330px !important;
+  height: 100% !important;
+}
+
+.sc-evaluation-requested-layout .eval-score-card svg {
+  width: min(100%, 470px) !important;
+  height: 250px !important;
+}
+
+.sc-evaluation-requested-layout .eval-feedback-grid {
+  grid-area: feedback !important;
+  grid-template-columns: 1fr 1fr !important;
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+.sc-evaluation-requested-layout .eval-feedback-grid > .card,
+.sc-evaluation-requested-layout .eval-insights-card {
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+.sc-evaluation-requested-layout .eval-feedback-grid > .card > div:nth-child(2),
+.sc-evaluation-requested-layout .eval-insights-card > div:nth-child(2) {
+  max-height: 150px !important;
+  overflow: auto !important;
+}
+
+@media (max-width: 1180px) {
+  .sc-evaluation-requested-layout {
+    grid-template-rows: auto !important;
+  }
+}
+
+/* Side-by-side grid for Actionable Insights & Sample Better Responses */
+.eval-insights-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+  align-items: stretch;
+}
+
+@media (max-width: 1180px) {
+  .eval-insights-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
