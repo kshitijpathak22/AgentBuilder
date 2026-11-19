@@ -47,4 +47,4 @@ python-dotenv==1.2.2
 PyYAML==6.0.3
 
 # ── Observability ───────────────────────────────────────────────────────────
-azure-monitor-opentelemetry==1.8.10散瑲晩㹩㈽㈰⸴⸲ਲ
+azure-monitor-opentelemetry==1.8.10

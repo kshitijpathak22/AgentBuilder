@@ -12,6 +12,7 @@ import {
   ApiError
 } from '../services/api';
 import useSessionStore from '../store/sessionStore';
+import { preloadAvatarClips } from '../services/avatarClips';
 import '../styles/setup-session.css';
 
 // Regional Indian languages (other than Hindi) are hidden for now; the backend still supports them.
@@ -43,6 +44,8 @@ function suggestDifficulty(sessions) {
   return null;
 }
 const SetupSession = () => {
+  // Download the avatar clips while the user configures the session, so the session starts smoothly.
+  useEffect(() => { preloadAvatarClips(); }, []);
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
   const setSession = useSessionStore(state => state.setSession);

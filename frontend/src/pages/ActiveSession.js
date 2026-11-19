@@ -15,6 +15,7 @@ import {
 import useSessionStore from '../store/sessionStore';
 import useBrowserTranscription from '../hooks/useBrowserTranscription';
 import useCoachSpeaking, { createSpeechTimeline } from '../hooks/useCoachSpeaking';
+import { AVATAR_CLIPS, useClipSource } from '../services/avatarClips';
 import AvatarVideo from '../components/AvatarVideo';
 import {
   MessagesCircle,
@@ -38,17 +39,6 @@ const VOICE_MAX_DURATION_MS = 30 * 60 * 1000; // longest single voice connection
 const BROWSER_SPEECH_LANG = {
   en: 'en-IN', hi: 'hi-IN', fr: 'fr-FR', de: 'de-DE', es: 'es-ES', it: 'it-IT',
   gu: 'gu-IN', mr: 'mr-IN', ta: 'ta-IN', te: 'te-IN', bn: 'bn-IN', kn: 'kn-IN', ml: 'ml-IN', pa: 'pa-IN',
-};
-// Avatar clips per voice gender. `idle` is optional: without it the talking clip is frozen on a closed-mouth frame.
-const AVATAR_CLIPS = {
-  male: { talk: '/assets/ceo_male_talk.mp4', idle: '/assets/ceo_male_idle.mp4' },
-  female: {
-    talk: '/assets/cfo_female_talk.mp4',
-    idle: '/assets/cfo_female_idle.mp4',
-    // She sits at 60% of the frame width: placing that point at 60% of the box, then shifting left by
-    // 10% of the zoomed width, centres her at any box shape. The 1.25 zoom keeps the edges covered.
-    framing: { objectPosition: '60% 50%', transform: 'translateX(-12.5%) scale(1.25)', transformOrigin: '50% 0%' },
-  },
 };
 
 function bytesFromB64(b64) {
@@ -271,6 +261,9 @@ const ActiveSession = () => {
 
   const avatarGender = voiceGender || ((difficulty === 'Medium' || difficulty === 'Expert') ? 'female' : 'male');
   const avatarClips = AVATAR_CLIPS[avatarGender] || AVATAR_CLIPS.male;
+  // Played from memory once fully downloaded (usually already done on the setup page).
+  const talkClipSource = useClipSource(avatarClips.talk);
+  const idleClipSource = useClipSource(avatarClips.idle);
 
   // The avatar talks only while the coach is actually audible (from the playback schedule).
   const getPlaybackCtx = useCallback(() => playbackCtxRef.current, []);
@@ -1305,13 +1298,17 @@ const ActiveSession = () => {
               background: '#020617'
             }}
           >
-            <AvatarVideo
-              talkSrc={avatarClips.talk}
-              idleSrc={avatarClips.idle}
-              idleFrameSec={videoPauseFrames[avatarGender] ?? 0}
-              speaking={avatarSpeaking}
-              framing={avatarClips.framing}
-            />
+            {talkClipSource && (idleClipSource || !avatarClips.idle) ? (
+              <AvatarVideo
+                talkSrc={talkClipSource}
+                idleSrc={idleClipSource}
+                idleFrameSec={videoPauseFrames[avatarGender] ?? 0}
+                speaking={avatarSpeaking}
+                framing={avatarClips.framing}
+              />
+            ) : (
+              <div role="status" style={{ color: '#94a3b8', fontSize: '14px' }}>Loading avatar…</div>
+            )}
           </div>
 
           {error && (
